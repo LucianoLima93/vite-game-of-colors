@@ -1,10 +1,23 @@
-import './App.css'
+import './App.css';
+import { useAplicationContext } from './contexts/Context';
+import ColorBoard from './components/ColorBoard';
+import ScoreBoard from './components/Scoreboard';
+import useScoreBoard from './components/Scoreboard/useScoreBoard';
 
 function App() {
-  const randomColor = useColor();
+  const { toggleTimerOn} = useScoreBoard();
+  const { toggleTimerOnQuestion, toggleInProgress } = useAplicationContext();
+
   return (
-    <main>
-      <div className='w-80 h-80' style={{backgroundColor: randomColor[0]}}></div>
+    <main className='h-screen w-full bg-gray-50 flex flex-col justify-center items-center'>
+      <h1>Guess the Color</h1>
+      <ScoreBoard />
+      <ColorBoard />
+      <button onClick={() => {
+          toggleTimerOn();
+          toggleTimerOnQuestion();
+          toggleInProgress();
+        }}>Start</button>
     </main>
   )
 }
