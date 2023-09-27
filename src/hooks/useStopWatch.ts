@@ -17,6 +17,7 @@ const useStopWatch = () => {
     }
     return () => clearInterval(interval);
   }, [timerOn]);
+
   return {
     time: time.toString().padStart(2, '0'),
     timerOn,

@@ -1,7 +1,9 @@
 type IScore = {
-  guessedColor: string;
+  guessedColor: string | null;
   correctColor: string;
   score: number;
+  lightOrDarkCorrect: boolean;
+  lightOrDarkGuessed: string | boolean;
 }
 
 interface ContextProps {
@@ -9,9 +11,9 @@ interface ContextProps {
   timeQuestion: string;
   inProgress: boolean;
   currentScore: number;
-  addScore: (score:IScore) => void;
-  resetScore: () => void;
-  resetTimeQuestion: () => void;
+  addScoreList: (score:IScore) => void;
+  resetScoreList: () => void;
+  resetTimeQuestion: (time:number) => void;
   toggleTimerOnQuestion: () => void;
   toggleInProgress: () => void;
   addCurrentScore: (score:number) => void;
