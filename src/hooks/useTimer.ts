@@ -1,16 +1,14 @@
 import { useState, useEffect } from 'react';
 
-const useStopWatch = () => {
+const useTimer = () => {
   const [time, setTime] = useState(0);
   const [timerOn, setTimerOn] = useState(false);
-  const [isTimer, setIsTimer] = useState(false);
-
+  
   useEffect(() => {
     let interval: any = null;
-    if (timerOn) {
+    if (timerOn && time > 0) {
       interval = setInterval(() => {
-        isTimer ? setTime((prevTime) => prevTime - 1)
-          : setTime((prevTime) => prevTime + 1);
+        setTime((prevTime) => prevTime - 1);
       }, 1000);
     } else {
       clearInterval(interval);
@@ -23,8 +21,7 @@ const useStopWatch = () => {
     timerOn,
     setTimerOn,
     setTime,
-    setIsTimer,
   };
 }
 
-export default useStopWatch;
+export default useTimer;

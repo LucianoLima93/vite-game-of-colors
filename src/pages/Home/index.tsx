@@ -1,6 +1,9 @@
-import ColorBoard from '../../components/ColorBoard'
-import ScoreBoard from '../../components/Scoreboard'
-import ScoreList from '../../components/ScoreList'
+
+import { lazy, memo } from 'react';
+
+const ScoreList = lazy(() => import('../../components/ScoreList'));
+const ScoreBoard = lazy(() => import('../../components/Scoreboard'));
+const ColorBoard = lazy(() => import('../../components/ColorBoard'));
 
 const Home = () => {
   return (
@@ -8,7 +11,7 @@ const Home = () => {
       <ScoreList />
       <div className='h-full flex flex-col justify-center items-center'>
         <>
-          <h1>Guess the Color</h1>
+          <h1 className='text-2xl p-4 font-bold'>Guess the Color</h1>
           <ScoreBoard />
           <ColorBoard />
         </>
@@ -17,4 +20,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default memo(Home);
