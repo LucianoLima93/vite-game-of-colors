@@ -5,6 +5,7 @@ const useTimer = () => {
   const [timerOn, setTimerOn] = useState(false);
   
   useEffect(() => {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     let interval: any = null;
     if (timerOn && time > 0) {
       interval = setInterval(() => {

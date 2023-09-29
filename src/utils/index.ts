@@ -10,9 +10,10 @@ const getArrayRandomHexColor = (length: number): Array<string> => {
   return Array.from({ length }).fill('').map(getRandomHexColor);
 };
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const lightOrDark = (color: any) => {
   // Variables for red, green, blue values
-  let r, g, b, hsp;
+  let r, g, b;
   // Check the format of the color, HEX or RGB?
   if (color.match(/^rgb/)) {
     // If RGB --> store the red, green, blue values in separate variables
@@ -29,7 +30,7 @@ const lightOrDark = (color: any) => {
     b = color & 255;
   }
   // HSP (Highly Sensitive Poo) equation from http://alienryderflex.com/hsp.html
-  hsp = Math.sqrt(
+  const hsp = Math.sqrt(
     0.299 * (r * r) +
     0.587 * (g * g) +
     0.114 * (b * b)

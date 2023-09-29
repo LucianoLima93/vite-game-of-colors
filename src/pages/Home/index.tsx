@@ -1,5 +1,5 @@
 
-import { lazy, memo } from 'react';
+import { lazy } from 'react';
 import Ranking from '../../components/Ranking';
 import Button from '../../components/shared/Button';
 import useHome from './useHome';

@@ -44,4 +44,4 @@ interface ContextUpdateProps {
 
 interface ContextProviderProps {
   children: ReactNode;
-};
+}
