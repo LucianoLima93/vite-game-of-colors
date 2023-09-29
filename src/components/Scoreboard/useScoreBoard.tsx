@@ -5,8 +5,7 @@ import { useAplicationContext, useAplicationContextUpdate } from "../../contexts
 const useScoreBoard = () => {
   const { contextValue, time, currentScore } = useAplicationContext();
   const { inProgress, player } = contextValue;
-  const { toggleTimerOn, addTime, addCurrentScore, resetScoreList, addTimeQuestion, setInProgress, setRankingList } = useAplicationContextUpdate();
-  const { toggleTimerOnQuestion } = useAplicationContextUpdate();
+  const { toggleTimerOn, addTime, addCurrentScore, resetScoreList, toggleTimerOnQuestion, addTimeQuestion, setInProgress, setRankingList, setPlayer } = useAplicationContextUpdate();
 
   const saveGameResult = () => {
     // Reseta timer geral
@@ -17,6 +16,7 @@ const useScoreBoard = () => {
     addTime(0);
     // salva o ranking
     setRankingList((prev) => [...prev, {score: currentScore, difficulty: contextValue.difficulty, name: player || 'Anonymous'}]);
+    setPlayer('');
   };
   const startNewGame = () => {
     toggleTimerOn();

@@ -13,7 +13,6 @@ type IRanking = {
 };
 
 type ContextValueType = {
-  scoreList: Array<IScore>;
   timeOnQuestion: boolean;
   inProgress: boolean;
   difficulty: number;
@@ -23,6 +22,7 @@ type ContextValueType = {
 
 interface ContextProps {
   contextValue: ContextValueType;
+  scoreList: Array<IScore>;
   currentScore: number;
   time: string;
   timeQuestion: string;

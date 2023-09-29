@@ -11,9 +11,9 @@ const ColorBoard = lazy(() => import('../../components/ColorBoard'));
 const Home = () => {
   const { resetAllData } = useHome();
   return (
-    <div className='w-full h-full relative flex justify-between flex-wrap'>
+    <div className='w-full h-full relative flex md:justify-between flex-wrap justify-center'>
       <ScoreList />
-      <div className='h-full flex flex-col justify-center items-center'>
+      <div className='md:h-full mb-8 flex flex-col md:justify-center justify-start items-center order-1 md:order-none'>
         <>
           <h1 className='text-2xl p-4 font-bold'>Guess the Color</h1>
           <ScoreBoard />
@@ -21,9 +21,9 @@ const Home = () => {
         </>
       </div>
       <Ranking />
-      <Button className='bg-transparent absolute bottom-2 right-2' onClick={() => resetAllData()} >Reset all data</Button>
+      <Button className='bg-transparent md:absolute md:bottom-2 md:right-2 order-3 my-8' onClick={() => resetAllData()} >Reset all data</Button>
     </div>
   )
 }
 
-export default memo(Home);
+export default Home;

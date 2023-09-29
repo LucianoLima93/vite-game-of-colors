@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { CORRECT_ANSWER, OUT_OF_TIME, WRONG_ANSWER } from "../../constants";
 import { useAplicationContext, useAplicationContextUpdate } from "../../contexts/Context";
 import { getArrayRandomHexColor, getRandomInt, lightOrDark } from "../../utils";
