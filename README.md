@@ -1,27 +1,44 @@
-# React + TypeScript + Vite
+# Guess the color - Luciano Lima
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tecnologias utilizadas
 
-Currently, two official plugins are available:
+Este projeto utiliza as seguintes tecnologias:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [React](https://reactjs.org/): Biblioteca JavaScript de código aberto para construção de interfaces de usuário.
+- [TypeScript](https://www.typescriptlang.org/): Superset do JavaScript que adiciona tipagem estática opcional.
+- [Vite](https://vitejs.dev/) Ferramentas de construção para projetos web com React.
+- [Vitest](https://vitest.dev/): Framework de teste em JavaScript.
+- [TailwindCSS](https://tailwindcss.com/): Framework CSS utilitário para criação de designs personalizados.
 
-## Expanding the ESLint configuration
+## Como rodar o projeto
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Para rodar o projeto, siga os passos abaixo:
 
-- Configure the top-level `parserOptions` property like this:
+1. Certifique-se de ter o Node.js instalado em sua máquina. Você pode baixá-lo em: [https://nodejs.org/](https://nodejs.org/).
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+2. Clone o repositório do projeto:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+   ```bash
+   git clone https://github.com/LucianoLima93/vite-game-of-colors.git
+   ```
+
+3. Acesse o diretório do projeto:
+
+   ```bash
+   cd vite-game-of-colors
+   ```
+
+4. Instale as dependências do projeto:
+
+   ```bash
+   npm install
+   ```
+
+5. Inicie o servidor de desenvolvimento:
+
+   ```bash
+   npm run dev
+   ```
+
+   Isso iniciará o servidor de desenvolvimento do Vite, que compilará o código e abrirá o aplicativo no seu navegador. Qualquer alteração que você fizer nos arquivos será refletida automaticamente no navegador.
+
