@@ -8,7 +8,7 @@ const ScoreList = () => {
   const { scoreList } = contextValue;
 
   return (
-    <aside className='fixed h-full left-0 top-0 bg-gray-50 overflow-y-auto'>
+    <aside className='h-full bg-gray-50 overflow-y-auto'>
       <h2 className='text-lg font-semibold p-2'>Current/Last game</h2>
       <div className='flex text-sm border-2 border-accent'>
         <span className='p-2 border-r-2 border-accent'>Correct color</span>

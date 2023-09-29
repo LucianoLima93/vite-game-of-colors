@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 // import useTimer from "../../hooks/useTimer";
 import { useAplicationContext, useAplicationContextUpdate } from "../../contexts/Context";
-import usePersistedState from "../../hooks/usePersistedState";
 
 const useScoreBoard = () => {
-  const { contextValue, toggleTimerOn, addTime, addCurrentScore, resetScoreList, addTimeQuestion, setInProgress, } = useAplicationContext();
-  const { currentScore, inProgress, time } = contextValue;
+  const { contextValue, time, currentScore } = useAplicationContext();
+  const { inProgress, player } = contextValue;
+  const { toggleTimerOn, addTime, addCurrentScore, resetScoreList, addTimeQuestion, setInProgress, setRankingList } = useAplicationContextUpdate();
   const { toggleTimerOnQuestion } = useAplicationContextUpdate();
-  const [gameState, setGameState] = usePersistedState('game-state', {highScore: 0});
 
   const saveGameResult = () => {
     // Reseta timer geral
@@ -15,8 +14,9 @@ const useScoreBoard = () => {
     toggleTimerOn();
     toggleTimerOnQuestion();
     addTimeQuestion(0);
-    // salva o score
-    if (gameState.highScore < currentScore) setGameState({highScore: currentScore});
+    addTime(0);
+    // salva o ranking
+    setRankingList((prev) => [...prev, {score: currentScore, difficulty: contextValue.difficulty, name: player || 'Anonymous'}]);
   };
   const startNewGame = () => {
     toggleTimerOn();
@@ -45,11 +45,11 @@ const useScoreBoard = () => {
 
   // Salvar o score e resetar o game
   useEffect(() => {
-    if (time <= "00") {
+    if (time <= "00" && inProgress) {
       saveGameResult();
     }
   }, [time]);
 
-  return { time, currentScore, gameState, resetGame };
+  return { time, currentScore, resetGame };
 };
 export default useScoreBoard;

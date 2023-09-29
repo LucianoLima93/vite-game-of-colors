@@ -9,20 +9,27 @@ type IScore = {
 type IRanking = {
   name: string;
   score: number;
-  date: string;
+  difficulty: number;
 };
 
 type ContextValueType = {
   scoreList: Array<IScore>;
-  timeQuestion: string;
-  time: string;
-  inProgress: boolean;
-  currentScore: number;
   timeOnQuestion: boolean;
+  inProgress: boolean;
+  difficulty: number;
+  rankingList: Array<IRanking>;
+  player: string;
 }
 
 interface ContextProps {
   contextValue: ContextValueType;
+  currentScore: number;
+  time: string;
+  timeQuestion: string;
+}
+
+interface ContextUpdateProps {
+  toggleTimerOnQuestion: () => void;
   addScoreList: (score:IScore) => void;
   resetScoreList: () => void;
   setInProgress: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,10 +37,9 @@ interface ContextProps {
   addTimeQuestion: (time:number) => void;
   addTime: (time:number) => void;
   toggleTimerOn: () => void;
-}
-
-interface ContextUpdateProps {
-  toggleTimerOnQuestion: () => void;
+  setDifficulty: React.Dispatch<React.SetStateAction<number>>;
+  setRankingList: React.Dispatch<React.SetStateAction<Array<IRanking>>>;
+  setPlayer: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface ContextProviderProps {

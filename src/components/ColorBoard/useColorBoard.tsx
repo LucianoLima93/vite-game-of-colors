@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import { COLORS_ARRAY_LENGTH, CORRECT_ANSWER, OUT_OF_TIME, WRONG_ANSWER } from "../../constants";
-import { useAplicationContext } from "../../contexts/Context";
+import { useEffect, useState } from "react";
+import { CORRECT_ANSWER, OUT_OF_TIME, WRONG_ANSWER } from "../../constants";
+import { useAplicationContext, useAplicationContextUpdate } from "../../contexts/Context";
 import { getArrayRandomHexColor, getRandomInt, lightOrDark } from "../../utils";
 import useColor from "../../hooks/useColor";
 
 const useColorBoard = () => {
-  const { contextValue, addScoreList, addTimeQuestion, resetScoreList, setInProgress, addCurrentScore, addTime } = useAplicationContext();
-  const { timeQuestion, currentScore, inProgress, time } = contextValue;
-  const { correctColor, randomArrColors, setRandomArrColors, setCorrectColor } = useColor(COLORS_ARRAY_LENGTH);
+  const { contextValue, timeQuestion, currentScore, time} = useAplicationContext();
+  const {  inProgress, difficulty } = contextValue;
+  const { addScoreList, addTimeQuestion, resetScoreList, setInProgress, addCurrentScore, addTime, setDifficulty } = useAplicationContextUpdate();
+  const { correctColor, randomArrColors, setRandomArrColors, setCorrectColor } = useColor();
   const lightOrDarkCorrect:boolean = lightOrDark(correctColor) === 'light';
 
   const startGame = () => {
@@ -16,10 +17,17 @@ const useColorBoard = () => {
     resetScoreList();
   };
 
-  const resetColors = () => {
-    const newRandomArrColors = getArrayRandomHexColor(COLORS_ARRAY_LENGTH);
+  const resetColors = (difficultySelected:number = difficulty) => {
+    const newRandomArrColors = getArrayRandomHexColor(difficultySelected);
     setRandomArrColors(newRandomArrColors);
-    setCorrectColor(newRandomArrColors[getRandomInt(COLORS_ARRAY_LENGTH)]);
+    setCorrectColor(newRandomArrColors[getRandomInt(difficultySelected)]);
+  };
+
+  const changeDifficulty = (difficultySelected:number) => {
+    if (difficultySelected !== difficulty) {
+      setDifficulty(difficultySelected);
+      resetColors(difficultySelected);
+    }
   };
 
   const checkCorrectColor = (color: string) => {
@@ -33,7 +41,7 @@ const useColorBoard = () => {
     const lightOrDarkGuessed:boolean = lightOrDark(color) === 'light';
     
     addScoreList({
-      score: parseInt(timeQuestion),
+      score: 10 - parseInt(timeQuestion),
       correctColor: correctColor,
       guessedColor: color,
       lightOrDarkCorrect,
@@ -58,7 +66,7 @@ const useColorBoard = () => {
     }
   }, [timeQuestion]);
 
-  return { checkCorrectColor, startGame, timeQuestion, correctColor, randomArrColors, inProgress, lightOrDarkCorrect }
+  return { checkCorrectColor, startGame, changeDifficulty, timeQuestion, correctColor, randomArrColors, inProgress, lightOrDarkCorrect }
 };
 
 export default useColorBoard;

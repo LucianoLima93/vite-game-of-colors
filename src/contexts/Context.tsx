@@ -1,17 +1,20 @@
-import { createContext, useContext, useState, useMemo, useCallback } from 'react';
+import { createContext, useContext, useState, useMemo } from 'react';
 import useTimer from '../hooks/useTimer';
 import usePersistedState from '../hooks/usePersistedState';
+import { Difficulty } from '../enums';
 
 const Context = createContext<ContextProps>({} as ContextProps);
 const ContextUpdate = createContext<ContextUpdateProps>({} as ContextUpdateProps);
 
 export const ContextProvider:React.FC<ContextProviderProps> = ({ children }) => {
   const [scoreList, setScoreList] = usePersistedState<Array<IScore>>('score-list', []);
-  // const [rankingList, setRankingList] = usePersistedState<Array<IScore>>('score-list', []);
+  const [rankingList, setRankingList] = usePersistedState<Array<IRanking>>('ranking-list', []);
+  const [difficulty, setDifficulty] = useState<number>(Difficulty.EASY); // ['easy', 'medium', 'hard'
   const { time: timeQuestion, setTime: setTimeQuestion, setTimerOn: setTimerOnQuestion, timerOn:timeOnQuestion  } = useTimer();
   const { time, timerOn, setTimerOn, setTime } = useTimer();
   const [inProgress, setInProgress] = useState<boolean>(false);
   const [currentScore, setCurrentScore] = useState<number>(0);
+  const [player, setPlayer] = useState('');
 
   const addScoreList = (scoreItem: IScore) => {
     setScoreList([...scoreList, scoreItem]);
@@ -41,27 +44,35 @@ export const ContextProvider:React.FC<ContextProviderProps> = ({ children }) => 
   };
 
   const contextValue = useMemo(() => ({
-    scoreList,
-    timeQuestion,
-    time,
+    scoreList: scoreList.reverse(),
     inProgress,
-    currentScore,
     timeOnQuestion,
     timerOn,
-  }), [scoreList, timeQuestion, time, inProgress, currentScore, timeOnQuestion]);
+    difficulty,
+    rankingList: rankingList.sort((a, b) => b.score - a.score),
+    player,
+  }), [scoreList, inProgress, timeOnQuestion, timerOn, difficulty, rankingList]);
 
   return (
     <Context.Provider value={{
       contextValue,
-      addScoreList,
-      resetScoreList,
-      setInProgress,
-      addCurrentScore,
-      addTimeQuestion,
-      addTime,
-      toggleTimerOn,
+      timeQuestion,
+      time,
+      currentScore,
       }}>
-        <ContextUpdate.Provider value={{toggleTimerOnQuestion}}>
+        <ContextUpdate.Provider value={{
+          toggleTimerOnQuestion,
+          addScoreList,
+          resetScoreList,
+          setInProgress,
+          addCurrentScore,
+          addTimeQuestion,
+          addTime,
+          toggleTimerOn,
+          setDifficulty,
+          setRankingList,
+          setPlayer,
+          }}>
           {children}
         </ContextUpdate.Provider>
     </Context.Provider>

@@ -1,6 +1,5 @@
 export const TIME_LIMITE = 30;
 export const RESPONSE_TIME = 10;
-export const COLORS_ARRAY_LENGTH = 3;
 export const CORRECT_ANSWER = 5;
 export const WRONG_ANSWER = 1;
 export const OUT_OF_TIME = 2;

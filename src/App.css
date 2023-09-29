@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .default-btn {
+    @apply bg-light hover:bg-accent border-2 border-dark text-dark font-bold py-2 px-4 rounded-md w-32 hover:scale-95 transition-all;
+  }
+}
+
