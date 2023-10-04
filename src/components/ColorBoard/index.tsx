@@ -6,7 +6,7 @@ import { Difficulty } from "../../enums";
 
 const ColorBoard = () => {
   const { correctColor, randomArrColors, timeQuestion, inProgress, lightOrDarkCorrect, checkCorrectColor, startGame, changeDifficulty } = useColorBoard();
-  const { contextValue } = useAplicationContext();
+  const { difficulty } = useAplicationContext();
   const { setPlayer } = useAplicationContextUpdate();
 
   return (
@@ -33,7 +33,7 @@ const ColorBoard = () => {
         <>
           <div className="flex flex-col w-full gap-2">
             <div>
-              <h2 className="text-dark mb-1" >Difficulty: <span className="font-bold"> {Difficulty[contextValue.difficulty]}</span></h2>
+              <h2 className="text-dark mb-1" >Difficulty: <span className="font-bold"> {Difficulty[difficulty]}</span></h2>
               <div className="flex gap-2">
                 <Button onClick={() => changeDifficulty(Difficulty.EASY)}>Easy</Button>
                 <Button onClick={() => changeDifficulty(Difficulty.MEDIUM)}>Medium</Button>

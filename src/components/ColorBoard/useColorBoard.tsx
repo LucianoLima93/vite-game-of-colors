@@ -5,8 +5,7 @@ import { getArrayRandomHexColor, getRandomInt, lightOrDark } from "../../utils";
 import useColor from "../../hooks/useColor";
 
 const useColorBoard = () => {
-  const { contextValue, timeQuestion, currentScore, time} = useAplicationContext();
-  const {  inProgress, difficulty } = contextValue;
+  const { inProgress, difficulty, timeQuestion, currentScore, time} = useAplicationContext();
   const { addScoreList, addTimeQuestion, resetScoreList, setInProgress, addCurrentScore, addTime, setDifficulty } = useAplicationContextUpdate();
   const { correctColor, randomArrColors, setRandomArrColors, setCorrectColor } = useColor();
   const lightOrDarkCorrect:boolean = lightOrDark(correctColor) === 'light';

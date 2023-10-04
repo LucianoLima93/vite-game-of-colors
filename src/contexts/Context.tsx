@@ -8,7 +8,7 @@ export const ContextUpdate = createContext<ContextUpdateProps>({} as ContextUpda
 
 export const ContextProvider:React.FC<ContextProviderProps> = ({ children }) => {
   const [_scoreList, setScoreList] = usePersistedState<Array<IScore>>('score-list', []);
-  const [rankingList, setRankingList] = usePersistedState<Array<IRanking>>('ranking-list', []);
+  const [_rankingList, setRankingList] = usePersistedState<Array<IRanking>>('ranking-list', []);
   const [difficulty, setDifficulty] = useState<number>(Difficulty.EASY); // ['easy', 'medium', 'hard'
   const { time: timeQuestion, setTime: setTimeQuestion, setTimerOn: setTimerOnQuestion, timerOn:timeOnQuestion  } = useTimer();
   const { time, timerOn, setTimerOn, setTime } = useTimer();
@@ -42,23 +42,17 @@ export const ContextProvider:React.FC<ContextProviderProps> = ({ children }) => 
   const toggleTimerOn = () => {
     setTimerOn((prev) => !prev);
   };
-  const scoreList = useMemo(() =>
-    _scoreList.reverse()
-  , [_scoreList]);
-
-  const contextValue = useMemo(() => ({
-    inProgress,
-    timeOnQuestion,
-    timerOn,
-    difficulty,
-    rankingList: rankingList.sort((a, b) => b.score - a.score),
-    player,
-  }), [inProgress, timeOnQuestion, timerOn, difficulty, rankingList]);
-
+  const scoreList = useMemo(() => _scoreList.reverse(), [_scoreList]);
+  const rankingList = useMemo(() => _rankingList.sort((a, b) => b.score - a.score), [_rankingList]);
   return (
     <Context.Provider value={{
-      contextValue,
+      inProgress,
       scoreList,
+      timeOnQuestion,
+      timerOn,
+      difficulty,
+      rankingList,
+      player,
       timeQuestion,
       time,
       currentScore,

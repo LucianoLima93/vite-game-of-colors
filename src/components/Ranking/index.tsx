@@ -3,8 +3,7 @@ import { useAplicationContext } from "../../contexts/Context"
 import { Difficulty } from '../../enums';
 
 const Ranking = () => {
-  const { contextValue } = useAplicationContext();
-  const { rankingList } = contextValue;
+  const { rankingList } = useAplicationContext();
   return (
     <aside className='overflow-y-auto w-96 order-3 md:order-none p-2'>
       <h2 className='text-lg font-semibold p-2'>Ranking Guess the color game</h2>

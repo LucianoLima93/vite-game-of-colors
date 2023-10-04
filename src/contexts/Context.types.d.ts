@@ -12,16 +12,13 @@ type IRanking = {
   difficulty: number;
 };
 
-type ContextValueType = {
+interface ContextProps {
+  timerOn: boolean;
   timeOnQuestion: boolean;
   inProgress: boolean;
   difficulty: number;
   rankingList: Array<IRanking>;
   player: string;
-}
-
-interface ContextProps {
-  contextValue: ContextValueType;
   scoreList: Array<IScore>;
   currentScore: number;
   time: string;

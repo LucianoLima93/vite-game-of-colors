@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import { useAplicationContext, useAplicationContextUpdate } from "../../contexts/Context";
 
 const useScoreBoard = () => {
-  const { contextValue, time, currentScore } = useAplicationContext();
-  const { inProgress, player } = contextValue;
+  const { inProgress, player, time, currentScore, difficulty } = useAplicationContext();
   const { toggleTimerOn, addTime, addCurrentScore, resetScoreList, toggleTimerOnQuestion, addTimeQuestion, setInProgress, setRankingList, setPlayer } = useAplicationContextUpdate();
 
   const saveGameResult = () => {
@@ -15,7 +14,7 @@ const useScoreBoard = () => {
     addTimeQuestion(0);
     addTime(0);
     // salva o ranking
-    setRankingList((prev) => [...prev, {score: currentScore, difficulty: contextValue.difficulty, name: player || 'Anonymous'}]);
+    setRankingList((prev) => [...prev, {score: currentScore, difficulty, name: player || 'Anonymous'}]);
     setPlayer('');
   };
   const startNewGame = () => {

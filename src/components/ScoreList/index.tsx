@@ -5,7 +5,7 @@ import wrongIcon from '../../assets/icons/close-circle.svg';
 
 const ScoreList = () => {
   const { scoreList } = useAplicationContext();
-
+  
   return (
     <aside className='md:h-full h-fit mb-8 bg-gray-50 overflow-y-auto order-2 md:order-none md:w-auto w-full md:px-2 px-5'>
       <h2 className='text-lg font-semibold p-2'>Current/Last game</h2>
